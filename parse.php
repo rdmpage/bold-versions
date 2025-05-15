@@ -35,19 +35,19 @@ $row_count = 0;
 
 $filename = "/Volumes/LaCie/BOLD-data-packages/iBOLD.31-Dec-2016/iBOLD.31-Dec-2016.tsv"; // Curated version of iBOL
 
-//$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.30-Mar-2022/BOLD_Public.30-Mar-2022.tsv"; // 0
-//$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.06-Jul-2022/BOLD_Public.06-Jul-2022.tsv"; // 1
-//$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.28-Sep-2022/BOLD_Public.28-Sep-2022.tsv"; // 2
-//$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.30-Dec-2022/BOLD_Public.30-Dec-2022.tsv"; // 3
+$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.30-Mar-2022/BOLD_Public.30-Mar-2022.tsv"; // 0
+$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.06-Jul-2022/BOLD_Public.06-Jul-2022.tsv"; // 1
+$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.28-Sep-2022/BOLD_Public.28-Sep-2022.tsv"; // 2
+$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.30-Dec-2022/BOLD_Public.30-Dec-2022.tsv"; // 3
 
-//$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.31-Mar-2023/BOLD_Public.31-Mar-2023.tsv"; // 0
-//$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.30-Jun-2023/BOLD_Public.30-Jun-2023.tsv"; // 1
-//$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.29-Sep-2023/BOLD_Public.29-Sep-2023.tsv"; // 2
-//$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.29-Dec-2023/BOLD_Public.29-Dec-2023.tsv"; // 3
+$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.31-Mar-2023/BOLD_Public.31-Mar-2023.tsv"; // 0
+$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.30-Jun-2023/BOLD_Public.30-Jun-2023.tsv"; // 1
+$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.29-Sep-2023/BOLD_Public.29-Sep-2023.tsv"; // 2
+$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.29-Dec-2023/BOLD_Public.29-Dec-2023.tsv"; // 3
 
-//$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.29-Mar-2024/BOLD_Public.29-Mar-2024.tsv"; // 0
-//$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.19-Jul-2024/BOLD_Public.19-Jul-2024.tsv"; // 1
-//$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.06-Sep-2024/BOLD_Public.06-Sep-2024.tsv"; // 2 - this was used to make bold-viewer
+$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.29-Mar-2024/BOLD_Public.29-Mar-2024.tsv"; // 0
+$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.19-Jul-2024/BOLD_Public.19-Jul-2024.tsv"; // 1
+$filename = "/Volumes/LaCie/BOLD-data-packages/BOLD_Public.06-Sep-2024/BOLD_Public.06-Sep-2024.tsv"; // 2 - this was used to make bold-viewer
 
 $version = '';
 $date = '';
@@ -226,11 +226,13 @@ while (!feof($file_handle))
 						db_put($sql);
 					}
 					
+					/*
 					if ($record->processid == 'ASQSQ702-10')
 					{
 						print_r($record);
 						exit();
 					}
+					*/
 				}
 			}
 		}

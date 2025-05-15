@@ -10,14 +10,16 @@ When we load the first data package all rows in the database will have NULL valu
 
 At the end of this process we have a list of values for the selected fields for each barcode, together with the time span that those values were valid.
 
-## Exanples
+## Examples
 
-### ASQSQ702-10
-check ASQSQ702-10 as in Postgres it is in BIN BOLD:AAH8705	(6-9-2024) but in versions it is BOLD:AFQ2355 2024-03-29
+Papers to look at
+
+- https://peerj.com/articles/11192/#results
+
 
 ### BOLD:AAH8697
 
-BOLD:AAH8697 is listed in description of https://tb.plazi.org/GgServer/html/23F3367C3AD082ADE37550FFA9C68FDD/1 Heterogamus donstonei but this BIN is currently not associated with name in BOLD. Which BIN has the type specimen?
+BOLD:AAH8697 is listed in the description of https://tb.plazi.org/GgServer/html/23F3367C3AD082ADE37550FFA9C68FDD/1 Heterogamus donstonei but this BIN is currently not associated with name in BOLD. Which BIN has the type specimen?
 
 Note that we can search on consensus sequences in BOLD View.
 
