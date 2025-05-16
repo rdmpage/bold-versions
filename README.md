@@ -6,6 +6,25 @@ Exploring how barcode identifications have changed between data releases. Past v
 
 Rather than store all the data we use [Tuple-versioning](https://en.wikipedia.org/wiki/Tuple-versioning) so that we store values for `processid` and the various data fields, together values for `valid_from` and `valid_to`. The first time a combination of values is found we set `valid_from` to the YYYY-MM-DD date of the corresponding data package, and `valid_to` to `NULL`. Note that we may have multiple barcodes for a given `processid` (e.g., for different genes) so we index on both `processid` and `marker_code`. We also compute a MD5 hash of the data for a barcode to enable fast lookup of a particular set of values. Also note that a hash is not sufficient to identify an edit as the same set of values may have more than one period of validity. For example, a barcode may be in one BIN, then move to another, then move back again.
 
+## Data
+
+| Dataset | DOI |
+|--|--|
+| iBOLD.31-Dec-2016 | 10.5883/dp-ibold.31-dec-2016 |
+| BOLD_Public.30-Mar-2022 | 10.5883/dp-bold_public.30-mar-2022 |
+| BOLD_Public.06-Jul-2022 | 10.5883/dp-bold_public.06-jul-2022 |
+| BOLD_Public.28-Sep-2022 | 10.5883/dp-bold_public.28-sep-2022 |
+| BOLD_Public.30-Dec-2022 | 10.5883/dp-bold_public.30-dec-2022 |
+| BOLD_Public.31-Mar-2023 | 10.5883/dp-bold_public.31-mar-2023 |
+| BOLD_Public.30-Jun-2023 | 10.5883/dp-bold_public.30-jun-2023 |
+| BOLD_Public.29-Sep-2023 | 10.5883/dp-bold_public.29-sep-2023 |
+| BOLD_Public.29-Dec-2023 | 10.5883/dp-bold_public.29-dec-2023 |
+| BOLD_Public.29-Mar-2024 | 10.5883/dp-bold_public.29-mar-2024 |
+| BOLD_Public.19-Jul-2024 | 10.5883/dp-bold_public.19-jul-2024 |
+| BOLD_Public.06-Sep-2024 | no DOI |
+
+## Methods
+
 When we load the first data package all rows in the database will have NULL values for `valid_to`. We then add the remaining data packages from oldest to most recent. For each barcode if the data in the current package is the same as that already in the database we do nothing. If the data has changed we (a) set `valid_to` for the existing row to the YYYY-MM-DD data of the current data package, and add a new row with `valid_from` set to the same date. 
 
 At the end of this process we have a list of values for the selected fields for each barcode, together with the time span that those values were valid.

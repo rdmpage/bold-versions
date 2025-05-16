@@ -198,13 +198,13 @@ if (0)
 	$processid = 'AACTA1277-20'; // Margarita Miklasevskaja to Margarita G Miklasevskaja
 	
 	//$processid = 'OPPUM2195-17'; // Poanes hobomok to Lon hobomok
-	//$processid = 'XAF587-05';
+	$processid = 'XAF587-05';
 	
-	$processid = 'GBMLG0261-06';
-	$processid = 'DUTCH363-19';
-	$processid = 'GBMLG0277-06';
+	//$processid = 'GBMLG0261-06';
+	//$processid = 'DUTCH363-19';
+	//$processid = 'GBMLG0277-06';
 	
-	$processid = 'EPNG7021-12';
+	//$processid = 'EPNG7021-12';
 	
 	$sql = 'SELECT * FROM version WHERE processid="' . $processid . '" ORDER BY valid_from';
 	
@@ -359,12 +359,31 @@ else
 	BINs for R. arria (BOLD:ABX0547, BOLD: ADD3784, BOLD:ADD3785) and 
 	four BINs for R. bilix (BOLD:ACF3699, BOLD: ABX0491, BOLD:ADD1839, BOLD:ABX0493). 
 	*/
-	//$bin = 'BOLD:ABX0491';
+	$bin = 'BOLD:ABX0491';
 	//$bin = 'BOLD:ACF3699'; // now ABX0491
 	//$bin = 'BOLD:ADD1839'; // no change
 	//$bin = 'BOLD:ABX0493'; // no change
 	
 	//$bin = 'BOLD:ADD3785';
+	
+	/*
+	https://cdnsciencepub.com/doi/10.1139/gen-2017-0096
+	
+	Table 1, ABZ6180, which is now merged into AAA5893
+	AAA5893 is a big BIN that has subsumed several others over time, and is included in
+	Table 2
+	
+	Some barcodes in AAA5893 have nice illustrations presumably from a paper, e.g. 
+	BHTT083-09, and the term "Plate" means plate as in figure.
+	
+	*/
+	//$bin = 'BOLD:ABZ6180'; 
+	//$bin = 'BOLD:AAA5893';
+	
+	//$bin = 'BOLD:AAO3000';
+	
+	
+	//$bin = 'BOLD:AAB3486';
 	
 	// get all barcodes that have ever been in a BIN
 	$sql = 'SELECT v2.processid, v2.bin_uri, v2.valid_from, v2.valid_to
