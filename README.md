@@ -48,6 +48,23 @@ AATTTTATATTTTATYTTTGGGATATGGGCTGGTATAATTGGTATRTCTATAAGATTAATTATTCGAATAGAGTTGGGKG
 
 ## Queries
 
+### processids which have more than one identification 
+
+```
+SELECT processid
+FROM version
+GROUP BY processid
+HAVING COUNT(DISTINCT identification) > 1;
+```
+
+### processids which have more than one person identifying the specimen 
+
+```
+SELECT processid
+FROM version
+GROUP BY processid
+HAVING COUNT(DISTINCT identified_by) > 1;
+```
 
 
 ## Reading

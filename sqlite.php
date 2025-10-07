@@ -70,8 +70,12 @@ function obj_to_sql($obj, $table_name = 'table')
 	foreach ($obj as $k => $v)
 	{
 		$keys[] = '"' . $k . '"'; // must be double quotes
-	
-		if (is_array($v))
+		
+		if (!$v)
+		{
+			$values[] = 'NULL';
+		}	
+		elseif (is_array($v))
 		{
 			$values[] = "'" . str_replace("'", "''", json_encode(array_values($v))) . "'";
 		}

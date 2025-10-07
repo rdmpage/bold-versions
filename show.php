@@ -1,191 +1,12 @@
 <?php
 
+// Explore visualisations of changing BINs
+
 require_once (dirname(__FILE__) . '/sqlite.php');
+require_once (dirname(__FILE__) . '/changes.php');
 require_once (dirname(__FILE__) . '/colour.php');
 
-
 //----------------------------------------------------------------------------------------
-/* 
-doi:10.1186/1471-2105-14-16
-
-The stemming (equivalent) in Taxamatch equates 
--a, -is -us, -ys, -es, -um, -as and -os when 
-they occur at the end of a species epithet 
-(or infraspecies) by changing them all to -a. 
-Thus (for example) the epithets “nitidus”, “nitidum”, 
-“nitidus” and “nitida” will all be considered 
-equivalent following this process.  
-
-To this I've added -se and -sis, -ue and -uis (and more)
-*/
-function stem_epithet($epithet)
-{
-	$stem = $epithet;
-	$matched = '';
-	
-	// 6
-    // -ulatum
-    if ($matched == '') {
-        if (preg_match('/ulatum$/', $epithet)) {
-            $matched = 'ulatum';
-        }
-    }
-
-	
-	// 4
-	
-    // -atum
-    if ($matched == '') {
-        if (preg_match('/atum$/', $epithet)) {
-            $matched = 'atum';
-        }
-    }
-	
-	// 3
-	
-    // -ata
-    if ($matched == '') {
-        if (preg_match('/ata$/', $epithet)) {
-            $matched = 'ata';
-        }
-    }	
-	
-    // -lis
-    if ($matched == '') {
-        if (preg_match('/lis$/', $epithet)) {
-            $matched = 'lis';
-        }
-    }
-	
-    // -sis
-    if ($matched == '') {
-        if (preg_match('/sis$/', $epithet)) {
-            $matched = 'sis';
-        }
-    }
-    
-    // -uis
-    if ($matched == '') {
-        if (preg_match('/uis$/', $epithet)) {
-            $matched = 'uis';
-        }
-    }
-    
-	
-	// 2
-
-    // -se
-    if ($matched == '') {
-        if (preg_match('/se$/', $epithet)) {
-            $matched = 'se';
-        }
-    } 
-       
-    // -ue
-    if ($matched == '') {
-        if (preg_match('/ue$/', $epithet)) {
-            $matched = 'ue';
-        }
-    }
-    // -is
-    if ($matched == '') {
-        if (preg_match('/is$/', $epithet)) {
-            $matched = 'is';
-        }
-    }
-    // -us
-    if ($matched == '') {
-        if (preg_match('/us$/', $epithet)) {
-            $matched = 'us';
-        }
-    }
-    // -ys
-    if ($matched == '') {
-        if (preg_match('/ys$/', $epithet)) {
-            $matched = 'ys';
-        }
-    }
-    // -es
-    if ($matched == '') {
-        if (preg_match('/es$/', $epithet)) {
-            $matched = 'es';
-        }
-    }
-    // -um
-    if ($matched == '') {
-        if (preg_match('/um$/', $epithet)) {
-            $matched = 'um';
-        }
-    }
-    // -as
-    if ($matched == '') {
-        if (preg_match('/as$/', $epithet)) {
-            $matched = 'as';
-        }
-    }
-    // -os
-    if ($matched == '') {
-        if (preg_match('/os$/', $epithet)) {
-            $matched = 'os';
-        }
-    }
-
-    // -le
-    if ($matched == '') {
-        if (preg_match('/le$/', $epithet)) {
-            $matched = 'le';
-        }
-    }
-
-    // stem
-    if ($matched != '') {
-        $pattern = '/' . $matched . '$/';
-        $stem = preg_replace($pattern, 'a', $epithet);
-    } else {
-        /* Tony's algorithm doesn't handle ii and i */
-        // -ii -i 
-        if (preg_match('/ii$/', $epithet)) {
-            $stem = preg_replace('/ii$/', 'i', $epithet);
-        }
-    }
-    
-    //echo "-- stem=$stem\n";
-
-    return $stem;
-}
-
-//----------------------------------------------------------------------------------------
-// Test whether two taxonomic names are likely to be synonyms based on shared epithets
-function possible_synonyms($name1, $name2)
-{
-	$synomyms = false;
-	
-	// do names have epithets?
-	$parts1 = explode(' ', $name1);
-	$parts2 = explode(' ', $name2);
-	
-	$num_parts1 = count($parts1);
-	$num_parts2 = count($parts2);
-
-	if ($num_parts1 >= 2 && $num_parts2 >= 2)
-	{
-		echo "-- " . stem_epithet($parts1[$num_parts1 - 1]) . ' vs. ' . stem_epithet($parts2[$num_parts2 - 1]) . "\n";
-	
-		// are stemmed epithets the same?
-		if (strcmp(stem_epithet($parts1[$num_parts1 - 1]), stem_epithet($parts2[$num_parts2 - 1])) == 0)
-		{
-			$synomyms = true;
-		}
-	}
-	
-	
-	return $synomyms;
-}
-
-//----------------------------------------------------------------------------------------
-
-
-
 
 if (0)
 {
@@ -195,7 +16,7 @@ if (0)
 	//$processid = 'GMCDA679-16';
 	//$processid = 'GMCCB776-17';
 	//$processid = 'ASQSQ702-10'; // multiple bin moves
-	$processid = 'AACTA1277-20'; // Margarita Miklasevskaja to Margarita G Miklasevskaja
+	//$processid = 'AACTA1277-20'; // Margarita Miklasevskaja to Margarita G Miklasevskaja
 	
 	//$processid = 'OPPUM2195-17'; // Poanes hobomok to Lon hobomok
 	$processid = 'XAF587-05';
@@ -377,15 +198,15 @@ else
 	BHTT083-09, and the term "Plate" means plate as in figure.
 	
 	*/
-	//$bin = 'BOLD:ABZ6180'; 
-	//$bin = 'BOLD:AAA5893';
+	$bin = 'BOLD:ABZ6180'; 
+	$bin = 'BOLD:AAA5893';
 	
 	//$bin = 'BOLD:AAO3000';
 	
 	
 	//$bin = 'BOLD:AAB3486';
 	
-	// get all barcodes that have ever been in a BIN
+	// get all barcodes that have ever been in the BIN
 	$sql = 'SELECT v2.processid, v2.bin_uri, v2.valid_from, v2.valid_to
 	FROM version as v1 
 	INNER JOIN version AS v2 ON v1.processid=v2.processid
@@ -498,7 +319,7 @@ else
     	$first = true;
     	foreach ($item as $time_slice => $bin)
     	{
-    		// link to redecessor
+    		// link to predecessor
     		if (!$first)
     		{
     			$path .= "->";
@@ -611,16 +432,6 @@ else
     echo join("\n", $paths) . "\n";
     
     echo "}\n";
-    
- 
-
-
 }
-
-
-	
-
-
-
 
 ?>
